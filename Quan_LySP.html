@@ -1,0 +1,419 @@
+
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iHub - Quản lý sản phẩm</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="../Css/Quan_LySP.css">
+</head>
+<body>
+
+    <!-- TOP HEADER -->
+    <div class="top-header">
+        <div class="container">
+            <div class="inner-wrap">
+                <div class="inner-item">
+                    <i class="fa-solid fa-phone"></i>
+                    0123.456.789
+                </div>
+
+                <div class="inner-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    contact@ihub.vn
+                </div>
+
+                <div class="inner-item">
+                    <i class="fa-solid fa-user-shield"></i>
+                    Quản trị viên
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END TOP HEADER -->
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container header-container">
+
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i data-lucide="smartphone"></i>
+                </div>
+
+                <div class="logo-text">
+                    <span class="brand-name">iHub</span>
+                    <span class="brand-sub">Apple Authorised</span>
+                </div>
+            </a>
+
+            <nav class="nav-menu">
+                <ul>
+                    <li>
+                        <a href="#" class="nav-link">Trang chủ</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">Sản phẩm</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link active">Quản lý sản phẩm</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">Danh mục</a>
+                    </li>
+                    <li>
+                        <a href="#footer" class="nav-link">Liên hệ</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="search-box">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" id="searchInput"
+                           placeholder="Tìm sản phẩm...">
+                </div>
+
+                <button class="cart-btn" id="logoutBtn" title="Đăng xuất">
+                    <i data-lucide="log-out"></i>
+                </button>
+            </div>
+
+        </div>
+    </header>
+    <!-- END HEADER -->
+
+    <!-- MAIN -->
+    <main class="container product-management" id="products">
+
+        <section class="page-heading">
+            <div>
+                <p class="eyebrow">IPHONE STORE MANAGEMENT</p>
+                <h1>Quản lý sản phẩm</h1>
+                <p class="description">
+                    Quản lý thông tin, giá bán, danh mục và số lượng tồn kho iPhone.
+                </p>
+            </div>
+
+            <button class="btn btn-primary" id="addBtn">
+                <i data-lucide="plus"></i>
+                Thêm sản phẩm mới
+            </button>
+        </section>
+
+        <!-- THỐNG KÊ -->
+        <section class="stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-lucide="smartphone"></i>
+                </div>
+                <div>
+                    <p>Tổng sản phẩm</p>
+                    <h2 id="totalStat">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-lucide="check-circle"></i>
+                </div>
+                <div>
+                    <p>Đang kinh doanh</p>
+                    <h2 id="activeStat">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-lucide="package"></i>
+                </div>
+                <div>
+                    <p>Sắp hết hàng</p>
+                    <h2 id="lowStat">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-lucide="wallet"></i>
+                </div>
+                <div>
+                    <p>Giá trị tồn kho</p>
+                    <h2 id="valueStat">0 ₫</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- BỘ LỌC -->
+        <section class="product-panel">
+
+            <div class="panel-heading">
+                <div>
+                    <h2>Danh sách sản phẩm</h2>
+                    <p class="description">
+                        Danh sách các sản phẩm iPhone trong hệ thống.
+                    </p>
+                </div>
+
+                <button class="btn btn-outline" id="exportBtn">
+                    <i data-lucide="download"></i>
+                    Xuất CSV
+                </button>
+            </div>
+
+            <div class="filters">
+                <div class="search-box search-product">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" id="tableSearch"
+                           placeholder="Tìm theo mã hoặc tên sản phẩm...">
+                </div>
+
+                <select id="categoryFilter">
+                    <option value="">Tất cả danh mục</option>
+                    <option value="iPhone 15 Series">iPhone 15 Series</option>
+                    <option value="iPhone 16 Series">iPhone 16 Series</option>
+                    <option value="iPhone 17 Series">iPhone 17 Series</option>
+                    <option value="iPhone khác">iPhone khác</option>
+                </select>
+
+                <select id="statusFilter">
+                    <option value="">Tất cả trạng thái</option>
+                    <option value="Đang kinh doanh">Đang kinh doanh</option>
+                    <option value="Ngừng kinh doanh">Ngừng kinh doanh</option>
+                </select>
+
+                <button class="btn btn-outline" id="resetFilter">
+                    <i data-lucide="rotate-ccw"></i>
+                    Đặt lại
+                </button>
+            </div>
+
+            <!-- BẢNG SẢN PHẨM -->
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll"></th>
+                            <th>SẢN PHẨM</th>
+                            <th>MÃ SẢN PHẨM</th>
+                            <th>DANH MỤC</th>
+                            <th>GIÁ NIÊM YẾT</th>
+                            <th>TỒN KHO</th>
+                            <th>TRẠNG THÁI</th>
+                            <th>THAO TÁC</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="productRows">
+                        <!-- JavaScript hiển thị sản phẩm tại đây -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                <span id="resultCount">Hiển thị 0 sản phẩm</span>
+
+                <button class="btn btn-outline" id="refreshBtn">
+                    <i data-lucide="refresh-cw"></i>
+                    Làm mới
+                </button>
+            </div>
+
+        </section>
+    </main>
+    <!-- END MAIN -->
+
+    <!-- FORM THÊM / SỬA SẢN PHẨM -->
+    <div class="modal-backdrop" id="productModal">
+        <div class="modal">
+
+            <div class="modal-heading">
+                <div>
+                    <h2 id="modalTitle">Thêm sản phẩm mới</h2>
+                    <p class="description">
+                        Nhập thông tin chi tiết của sản phẩm.
+                    </p>
+                </div>
+
+                <button class="close-btn" id="closeModal" type="button">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <form id="productForm">
+                <input type="hidden" id="originalCode">
+
+                <div class="form-grid">
+                    <label>
+                        Mã sản phẩm *
+                        <input type="text" id="code" required
+                               placeholder="IP15PM-256">
+                    </label>
+
+                    <label>
+                        Tên sản phẩm *
+                        <input type="text" id="name" required
+                               placeholder="iPhone 15 Pro Max">
+                    </label>
+
+                    <label>
+                        Danh mục *
+                        <select id="category" required>
+                            <option value="">Chọn danh mục</option>
+                            <option>iPhone 15 Series</option>
+                            <option>iPhone 16 Series</option>
+                            <option>iPhone 17 Series</option>
+                            <option>iPhone khác</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Hình ảnh (URL) *
+                        <input type="text" id="image" required
+                               placeholder="URL hình ảnh">
+                    </label>
+
+                    <label>
+                        Màu sắc *
+                        <select id="color" required>
+                            <option value="">Chọn màu</option>
+                            <option>Titan Tự Nhiên</option>
+                            <option>Titan Đen</option>
+                            <option>Titan Trắng</option>
+                            <option>Titan Xanh</option>
+                            <option>Đen</option>
+                            <option>Trắng</option>
+                            <option>Xanh</option>
+                            <option>Hồng</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Dung lượng *
+                        <select id="storage" required>
+                            <option value="">Chọn dung lượng</option>
+                            <option>128GB</option>
+                            <option>256GB</option>
+                            <option>512GB</option>
+                            <option>1TB</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Đơn giá (VNĐ) *
+                        <input type="number" id="price" min="0" required>
+                    </label>
+
+                    <label>
+                        Số lượng tồn kho *
+                        <input type="number" id="stock" min="0"
+                               step="1" required>
+                    </label>
+
+                    <label class="full">
+                        Trạng thái kinh doanh *
+                        <select id="status" required>
+                            <option>Đang kinh doanh</option>
+                            <option>Ngừng kinh doanh</option>
+                        </select>
+                    </label>
+                </div>
+
+                <p class="form-error" id="formError"></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline"
+                            id="cancelModal">Hủy</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i data-lucide="save"></i>
+                        Lưu sản phẩm
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <!-- END FORM -->
+
+    <!-- FOOTER -->
+    <footer id="footer" class="footer">
+        <div class="container footer-grid">
+
+            <div class="footer-col">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i data-lucide="smartphone"></i>
+                    </div>
+                    <span class="brand-name">iHub Store</span>
+                </div>
+
+                <p class="footer-desc">
+                    Hệ thống quản lý sản phẩm iPhone chính hãng.
+                    Giao diện quản trị dành cho nhân viên cửa hàng.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Quản lý</h4>
+                <ul class="footer-links">
+                    <li><a href="#products">Danh sách sản phẩm</a></li>
+                    <li><a href="#products">Quản lý danh mục</a></li>
+                    <li><a href="#products">Kiểm kê tồn kho</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Hỗ trợ</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Hướng dẫn sử dụng</a></li>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Liên hệ quản trị</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Thông tin liên hệ</h4>
+                <p class="contact-item">Email: contact@ihub.vn</p>
+                <p class="contact-item">Hotline: 0123.456.789</p>
+
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>
+                © 2026 iHub Retailer. Giao diện quản lý sản phẩm.
+            </p>
+        </div>
+    </footer>
+    <!-- END FOOTER -->
+
+    <div class="toast" id="toast"></div>
+
+    <script src="../Js/Quan_LySP.js "></script>
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>
